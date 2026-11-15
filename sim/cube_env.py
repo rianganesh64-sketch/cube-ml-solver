@@ -49,6 +49,19 @@ def apply_sequence(cube_state, sequence):
         cube_state = step(cube_state, move)
     return cube_state
 
+def is_solved(cube_state):
+    solved_cube = np.array([
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 
+        1, 1, 1, 1, 1, 1, 1, 1, 1, 
+        2, 2, 2, 2, 2, 2, 2, 2, 2, 
+        3, 3, 3, 3, 3, 3, 3, 3, 3, 
+        4, 4, 4, 4, 4, 4, 4, 4, 4, 
+        5, 5, 5, 5, 5, 5, 5, 5, 5
+    ])
+    return np.array_equal(solved_cube, cube_state)
+
+print(is_solved(apply_sequence(create_cube(), "")))
+
 
 
 
