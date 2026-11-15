@@ -1,5 +1,6 @@
 import pytest
-from sim.cube_env import create_cube, U, U_prime, U2
+from sim.turns import U, U_prime, U2
+from sim.cube_env import create_cube
 import numpy as np
 
 #testing commmand: cd .. followed by python -m pytest tests/test_cube_env.py
