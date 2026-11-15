@@ -5,27 +5,21 @@ import numpy as np
 array1 = np.arange(0, 6, 1, dtype=np.int_)
 cube_array = np.repeat(array1, 9)
 
+def create_cube():
+    array1 = np.arange(0, 6, 1, dtype=np.int_)
+    cube_array = np.repeat(array1, 9)
+    return cube_array 
 
 #Defining Functions (turns)
-
-print(cube_array)
 
 
 def U(cube_state):
     cube_state[[9, 10, 11, 18, 19, 20, 27, 28, 29, 36, 37, 38]] = cube_state[[36, 37, 38, 9, 10, 11, 18, 19, 20, 27, 28, 29]]
     return(cube_state)
     
+def U_prime(cube_state):
+    cube_state[[36, 37, 38, 9, 10, 11, 18, 19, 20, 27, 28, 29]] = cube_state[[9, 10, 11, 18, 19, 20, 27, 28, 29, 36, 37, 38]]
+    return(cube_state)
     
-    
-    
-    # green = cube_state[[9, 10, 11]]
-    # red = cube_state[[18, 19, 20]]
-    # blue = cube_state[[27, 28, 29]]
-    # orange = cube_state[[36, 37, 38]]
-    # cube_state[green] = cube_state[orange]
-    # cube_state[red] = cube_state[green]
-    # cube_state[blue] = cube_state[red]
-    # cube_state[orange] = cube_state[blue]
-    # return cube_state
 
-print(U(cube_array))
+print(U_prime(U(create_cube())))
