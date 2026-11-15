@@ -1,6 +1,6 @@
 import numpy as np
 from sim.turns import U, U_prime, U2, D, D_prime, D2, R, R_prime, R2, L, L_prime, L2, F, F_prime, F2, B, B2, B_prime
-#To run, cd sim followed by python cube_env.py
+#To run, cd .. followed by python -m sim.cube_env
 
 #Color Scheme Ordering: Indices 0 - 8 represent White, 9 - 17 is green, 18-26 is red, 27-35 is blue, 36-44 is orange, 45 - 53 is yellow
 array1 = np.arange(0, 6, 1, dtype=np.int_)
@@ -40,6 +40,14 @@ MOVES = {
 def step(cube_state, move):
     turn = MOVES[move]
     return turn(cube_state)
+
+#apply_sequence function to apply sequence onto cube
+
+def apply_sequence(cube_state, sequence):
+    sequence_list = sequence.split()
+    for move in sequence_list:
+        cube_state = step(cube_state, move)
+    return cube_state
 
 
 
