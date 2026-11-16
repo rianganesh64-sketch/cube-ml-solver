@@ -1,4 +1,5 @@
 import numpy as np
+import random as rand
 from sim.turns import U, U_prime, U2, D, D_prime, D2, R, R_prime, R2, L, L_prime, L2, F, F_prime, F2, B, B2, B_prime
 #To run, cd .. followed by python -m sim.cube_env
 
@@ -35,6 +36,15 @@ MOVES = {
     "B2": B2
 }
 
+opposite_faces = {
+    "U": "D",
+    "D": "U",
+    "R": "L",
+    "L": "R",
+    "F": "B",
+    "B": "F"
+}
+
 #Step Function to apply a turn
 
 def step(cube_state, move):
@@ -60,7 +70,48 @@ def is_solved(cube_state):
     ])
     return np.array_equal(solved_cube, cube_state)
 
-print(is_solved(apply_sequence(create_cube(), "")))
+def scrambler(depth):
+    history = []
+    all_moves = list(MOVES.keys())
+    for i in range(depth):
+        if len(history) == 0:
+            history.append(rand.choice(all_moves))
+        elif len(history) == 1:
+            forbidden_moves = valid_next_moves(history[0], None)
+            possible_moves = list(set(all_moves) - set(forbidden_moves))
+            random_move = rand.choice(possible_moves)
+            history.append(random_move)
+        else:
+            forbidden_moves = valid_next_moves(history[-1], history[-2])
+            possible_moves = list(set(all_moves) - set(forbidden_moves))
+            random_move = rand.choice(possible_moves)
+            history.append(random_move)
+    proper_history = " ".join(history)
+    scrambled_cube = apply_sequence(create_cube(), proper_history)
+    print(proper_history)
+    return scrambled_cube
+
+
+#helper for pruning repeat moves and opposite face repeat moves
+def valid_next_moves(last_move, second_last_move):
+    endings = ["", "'", "2"]
+    forbidden_faces = []
+    last_move_first = last_move[0]
+    forbidden_faces.append(last_move_first)
+    if second_last_move is not None and (opposite_faces[last_move_first] == second_last_move[0]):
+        second_last_first = second_last_move[0]
+        forbidden_faces.append(second_last_first)
+    forbidden_moves = [
+        face + ending
+
+        for face in forbidden_faces
+        for ending in endings
+    ]
+    return forbidden_moves
+
+print(scrambler(25))
+        
+
 
 
 
