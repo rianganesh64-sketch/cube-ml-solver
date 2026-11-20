@@ -109,10 +109,46 @@ def valid_next_moves(last_move, second_last_move):
     ]
     return forbidden_moves
 
-print(scrambler(25))
+
+#helper function for easily visualizing a cube
+def basic_render(cube_state):
+    #printing orange pieces (top)
+    for piece in range(9):
+        if (piece % 3 == 0):
+            print(f'      {cube_state[piece + 36]}', end=" ")
+        elif (piece % 3 == 2):
+            print(cube_state[piece + 36])
+        else:
+            print(cube_state[piece + 36], end=" ")
+    #printing three rows of green, white, blue
+    for i in range(3):
+        for piece in range(9):
+            if (piece < 3):
+                print(cube_state[piece + 9 + (3 * i)], end=" ")
+            elif (piece < 6):
+                print(cube_state[(piece - 3) + (3 * i)], end=" ")
+            else:
+                if (piece == 8):
+                    print(cube_state[(piece - 6) + 27 + (3* i)])
+                else:
+                    print(cube_state[(piece - 6) + 27 + (3* i)], end= " ")
+    #printing red face
+    for piece in range(9):
+            if (piece % 3 == 0):
+                print(f'      {cube_state[piece + 18]}', end=" ")
+            elif (piece % 3 == 2):
+                print(cube_state[piece + 18])
+            else:
+                print(cube_state[piece + 18], end=" ")
+    #printing yellow
+    for piece in range(9):
+            if (piece % 3 == 0):
+                print(f'      {cube_state[piece + 45]}', end=" ")
+            elif (piece % 3 == 2):
+                print(cube_state[piece + 45])
+            else:
+                print(cube_state[piece + 45], end=" ")
         
+   
 
-
-
-
-
+basic_render(scrambler(25))
