@@ -1,6 +1,6 @@
 import numpy as np
 import time
-from sim.cube_env import MOVES, step, is_solved, valid_next_moves, apply_sequence, create_cube, scrambler
+from sim.cube_env import MOVES, step, is_solved, valid_next_moves, scrambler
 
 #IDDFS (Interative Deepening Depth-First Search) is a baseline, graph and treee search algorithm that essentially checks every move for a given depth. Works well for low-depth
 #To run, cd .. followed by python -m solvers.iddfs
@@ -47,4 +47,5 @@ def solve_iddfs(start_state, max_depth=8):
             return (verdict, stats["nodes"], elapsed_time)
     return(None, stats["nodes"], time.perf_counter() - start_time)
 
-print(solve_iddfs(scrambler(5)))
+print(solve_iddfs(scrambler(6)))
+
