@@ -1,13 +1,13 @@
 import pytest
-from sim.turns import U, U_prime, U2
-from sim.cube_env import create_cube
+from sim.turns import U, U_prime, U2, D, D_prime, D2, R, R_prime, R2, L, L_prime, L2, F, F_prime, F2, B, B_prime, B2
+from sim.cube_env import create_cube, is_solved, MOVES
 import numpy as np
 
 #testing commmand: cd .. followed by python -m pytest tests/test_cube_env.py
 def test_order_4_identity():
     starting_cube = create_cube()
-    moved_cube = U(U(U(U(create_cube()))))
-    assert np.array_equal(moved_cube, starting_cube)
+    for move in MOVES.values():
+        assert is_solved(move(move(move(move(create_cube())))))
 
     moved_cube = U_prime(U_prime(U_prime(U_prime(create_cube()))))
     assert np.array_equal(moved_cube, starting_cube)
@@ -24,3 +24,4 @@ def test_double_turn():
     U_two = U2(starting_cube)
     positions = [U_double, U_prime_double, U_two]
     assert all(np.array_equal(positions[0], a) for a in positions[1: ])
+
