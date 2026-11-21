@@ -94,6 +94,8 @@ def scrambler(depth):
 
 #helper for pruning repeat moves and opposite face repeat moves
 def valid_next_moves(last_move, second_last_move):
+    if (last_move is None):
+            return []
     endings = ["", "'", "2"]
     forbidden_faces = []
     last_move_first = last_move[0]
@@ -150,5 +152,3 @@ def basic_render(cube_state):
                 print(cube_state[piece + 45], end=" ")
         
    
-
-basic_render(scrambler(25))
