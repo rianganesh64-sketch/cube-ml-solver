@@ -47,5 +47,5 @@ def solve_iddfs(start_state, max_depth=8):
             return (verdict, stats["nodes"], elapsed_time)
     return(None, stats["nodes"], time.perf_counter() - start_time)
 
-print(solve_iddfs(scrambler(6)))
+#print(solve_iddfs(scrambler(5)))
 

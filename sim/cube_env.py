@@ -88,7 +88,7 @@ def scrambler(depth):
             history.append(random_move)
     proper_history = " ".join(history)
     scrambled_cube = apply_sequence(create_cube(), proper_history)
-    print(proper_history)
+    #print(proper_history)
     return scrambled_cube
 
 
